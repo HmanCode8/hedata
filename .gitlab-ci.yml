@@ -1,0 +1,26 @@
+stages:
+  - build
+  - deploy
+
+# 构建阶段
+build-job:
+  stage: build
+  image: node:22 # 使用 Node.js 22
+  script:
+    - npm install -g pnpm
+    - pnpm install
+    - pnpm run build
+  artifacts:
+    paths:
+      - dataman # 保存构建的 dist 文件夹
+
+# 部署阶段
+deploy-job:
+  stage: deploy
+  image: debian:latest # 使用 Debian 镜像
+  before_script:
+    - apt-get update && apt-get install -y rsync ssh
+  script:
+    - rsync -avz --delete dist/ $SERVER_USER@$SERVER_HOST:$DEPLOY_DIR/
+  only:
+    - main_db # 仅在 main 分支触发

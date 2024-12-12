@@ -1,0 +1,13 @@
+{
+  "eslint.alwaysShowStatus": true, // 在下框显示ESLint图标
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true // 是否开启自动保存修复
+  },
+  "eslint.run": "onType", // 也可以 "onSave"，保存时检查
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "vue"
+  ]
+}

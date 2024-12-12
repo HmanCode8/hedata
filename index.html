@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/title.svg" />
+    <link rel="stylesheet" href="/static/iconFonts/iconfont.css" />
+    <script type="text/javascript" src="/static/iconFonts/iconfont.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>管线数据综合管理系统</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      const map2dConfigUrl = import.meta.env.VITE_CONFIG_URL;
+
+      // 加载配置脚本
+      const loadConfigScript = new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = map2dConfigUrl;
+        script.onload = resolve; // 确保加载完成后再执行下一步
+        document.head.appendChild(script);
+      });
+
+      // 等待配置加载完成后再启动主脚本
+      loadConfigScript.then(() => {
+        import('/src/main.js');
+      });
+    </script>
+    <!-- <script type="module" src="/src/main.js"></script> -->
+  </body>
+</html>
